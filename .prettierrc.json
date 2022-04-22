@@ -1,0 +1,20 @@
+{
+    "printWidth": 80
+    , "tabWidth": 2
+    , "useTabs": true
+    , "semi": true
+    , "singleQuote": true
+    , "trailingComma": "all"
+    , "bracketSpacing": true
+    , "jsxBracketSameLine": true
+    , "arrowParens": "avoid"
+    , "proseWrap": "always"
+    , "editor.formatOnSave": true
+    , "[javascript]": {
+        "editor.formatOnSave": true
+    }
+}
+
+// Set the default
+
+// Enable per-language
