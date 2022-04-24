@@ -28,8 +28,8 @@ galleryItemsList.append(...galleryList)
     
 galleryItemsList.addEventListener('click', onClick);
 
-function onClick(evt) {
-    evt.preventDefault();
+new SimpleLightbox('.gallery a', {captionDelay: 250, captionsData: 'alt'});
 
-    new SimpleLightbox('.gallery a', {captionDelay: 250, captionsData: 'alt'});
+function onClick(evt) {
+    evt.preventDefault();  
 }
