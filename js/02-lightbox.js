@@ -6,25 +6,34 @@ import { galleryItems } from './gallery-items.js';
 const galleryItemsList = document.querySelector(".gallery") 
 
 
- let galleryList = [];
+//  let galleryList = [];
 
-    galleryItems.forEach(item => {
-        const galleryLink = document.createElement('a');
-        galleryLink.classList.add('gallery__item');
-        galleryLink.href = `${item.original}`;
+//     galleryItems.forEach(item => {
+//         const galleryLink = document.createElement('a');
+//         galleryLink.classList.add('gallery__item');
+//         galleryLink.href = `${item.original}`;
 
-        const galleryImage = document.createElement('img');
-        galleryImage.classList.add('gallery__image');
-        galleryImage.src = `${item.preview}`;
-        galleryImage.alt = `${item.description}`;
+//         const galleryImage = document.createElement('img');
+//         galleryImage.classList.add('gallery__image');
+//         galleryImage.src = `${item.preview}`;
+//         galleryImage.alt = `${item.description}`;
 
-        galleryLink.append(galleryImage);
+//         galleryLink.append(galleryImage);
         
-        galleryList.push(galleryLink);
-    }
-    )
+//         galleryList.push(galleryLink);
+//     }
+//     )
 
-galleryItemsList.append(...galleryList)    
+// galleryItemsList.append(...galleryList)    
+
+const listItems = galleryItems
+    .map(galleryItems => 
+       `<a class="gallery__item" href=${galleryItems.original}><img class="gallery__image" src=${galleryItems.preview} alt = '${galleryItems.description}'/></a>`           
+      )
+    
+    .join("")
+
+galleryItemsList.innerHTML = listItems
     
 galleryItemsList.addEventListener('click', onClick);
 
