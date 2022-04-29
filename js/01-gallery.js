@@ -54,27 +54,90 @@ function onClick(evt) {
      }
     
     	const html = `<div class="modal"><img width=100%" height="100%" src = ${evt.target.dataset.source} ></div>`
-		const instance = basicLightbox.create(html, {onShow: (instance) => console.log('onShow', instance),
-		onClose: (instance) => console.log('onClose', instance)
+    const instance = basicLightbox.create(html, {
+        onShow: () => 
+            {
+            this.addEventListener("keydown", event => {
+                if (event.code === 'Escape') {
+                    instance.close(
+                };
+            });
+                    
+            console.log('onShow', instance); 
+            // console.log(this); 
+            
+            
+        },
+        onClose: () => {
+            window.removeEventListener('keydown', event);
+            console.log('onClose', instance);
+        }
 	})
 
 	instance.show()
 
 	// setTimeout(() => {
 	// 	instance.close()
-	// }, 3000)
-
-
-    window.addEventListener("keydown", event => {
-
-    if (event.code === 'Escape') {
-        instance.close()
-  }
-});
-
+    // }, 3000)
+    
+    //  onShow: (instance) => {
+    //     instance.element().querySelector('a').onclick = instance.close
+    // }
 }
 
+// function onImgClick(evt) {
+//     console.log(evt.target)
+// }
 
 
 
+document.querySelector('.modal').addEventListener('click', () => {console.log('hrehh')});
 
+
+
+import { galleryItems } from "./gallery-items.js";
+
+const gallery = document.querySelector(".gallery");
+let modalWindow;
+
+const handleGalleryClick = (e) => {
+  e.preventDefault();
+
+  const srcImage = e.target.getAttribute("data-source");
+
+  if (srcImage) {
+    modalWindow = basicLightbox.create(`<img id="preview" src="${srcImage}">`, {
+      onShow: () => gallery.addEventListener("keydown", handleToggler),
+      onClose: () => gallery.removeEventListener("keydown", handleToggler),
+    });
+    modalWindow.show();
+  }
+};
+
+const handleToggler = (e) => {
+  if (e.key === "Escape") modalWindow.close();
+};
+
+const renderGallery = () => {
+  const imagesHTML = galleryItems.map(
+    (item) =>
+      `
+          <li class="gallery__item">
+              <a class="gallery__link" href="${item.original}">
+                  <img 
+                      class="gallery__image" 
+                      src="${item.preview}" 
+                      alt="${item.description}" 
+                      data-source="${item.original}"
+                  >
+              </a>
+          </li>
+          `
+  );
+
+  gallery.innerHTML = imagesHTML.join("");
+};
+
+renderGallery();
+
+gallery.addEventListener("click", handleGalleryClick);
