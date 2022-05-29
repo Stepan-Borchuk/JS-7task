@@ -7,6 +7,7 @@ let modalImg;
 const onEscKeyPress = (e) => {
   if (e.key === "Escape") modalImg.close();
 };
+// console.log(galleryItems.original)
 
 const listItems = galleryItems
     .map(galleryItems =>            
